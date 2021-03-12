@@ -1,6 +1,7 @@
 package com.example.emergencyapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -40,6 +41,7 @@ public class MainActivity extends Activity {
         plansCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, Plan_View_Page.class));
             }
         });
 
