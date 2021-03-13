@@ -12,7 +12,7 @@
     android:id="@+id/ll">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card1"
+        android:id="@+id/churchCard"
         android:layout_width="match_parent"
         android:layout_height="97dp">
 
@@ -41,7 +41,7 @@
                 android:textSize="24sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView><androidx.cardview.widget.CardView
-    android:id="@+id/card2"
+    android:id="@+id/streetCard"
     android:layout_width="match_parent"
     android:layout_height="97dp">
 

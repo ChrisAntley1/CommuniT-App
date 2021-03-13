@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
         communitiesCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CommunitiesActivity.class));
             }
         });
 
