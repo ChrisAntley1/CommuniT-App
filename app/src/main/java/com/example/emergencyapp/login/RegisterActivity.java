@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,13 +35,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
 
-        register = (Button) findViewById(R.id.registerButton);
-        editName = (EditText) findViewById(R.id.editName);
-        editAddress = (EditText) findViewById(R.id.editAddress);
-        editEmail = (EditText) findViewById(R.id.editEmail);
-        editPassword = (EditText) findViewById(R.id.editPassword);
-        banner = (TextView) findViewById(R.id.Register_Banner);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        register = findViewById(R.id.activity_register_register_button);
+        editName = findViewById(R.id.activity_register_name_edit);
+        editAddress = findViewById(R.id.activity_register_address_edit);
+        editEmail = findViewById(R.id.activity_register_email_edit);
+        editPassword = findViewById(R.id.activity_register_password_edit);
+        banner = findViewById(R.id.activity_register_banner);
+        progressBar = findViewById(R.id.activity_register_progressbar);
+
         register.setOnClickListener(this);
         banner.setOnClickListener(this);
     }
@@ -53,10 +50,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.registerButton:
+            case R.id.activity_register_register_button:
                 registerUser();
                 break;
-            case R.id.Register_Banner:
+            case R.id.activity_register_banner:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
         }
@@ -120,13 +117,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(RegisterActivity.this, "User has been successfully registered!", Toast.LENGTH_LONG).show();
-                                        progressBar.setVisibility(View.GONE);
+
+                                        // Email Verification if we want at some point
+//                                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                                     }
 
                                     else {
                                         Toast.makeText(RegisterActivity.this, "Failed to register.", Toast.LENGTH_LONG).show();
-                                        progressBar.setVisibility(View.GONE);
                                     }
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             });
                         }

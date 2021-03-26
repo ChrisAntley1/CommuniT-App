@@ -9,8 +9,19 @@
     tools:visibility="visible">
 
 
+    <ProgressBar
+        android:id="@+id/activity_login_progressbar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/Login_Banner"
+        android:id="@+id/activity_login_banner"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="50dp"
@@ -22,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/Sub_Text"
+        android:id="@+id/activity_login_sub_banner"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -31,10 +42,10 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Login_Banner" />
+        app:layout_constraintTop_toBottomOf="@id/activity_login_banner" />
 
     <EditText
-        android:id="@+id/editEmail"
+        android:id="@+id/activity_login_email_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -44,10 +55,10 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Sub_Text" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_login_sub_banner" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/activity_login_password_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -58,10 +69,10 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_login_email_edit" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/activity_login_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -77,10 +88,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_login_password_edit" />
 
     <TextView
-        android:id="@+id/forgotPassword"
+        android:id="@+id/activity_login_forgot_password_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -89,10 +100,10 @@
         android:text="Forgot Password?"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_login_login_button" />
 
     <TextView
-        android:id="@+id/createAccount"
+        android:id="@+id/activity_login_create_account_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -101,7 +112,7 @@
         android:text="Create Account"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_login_login_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
