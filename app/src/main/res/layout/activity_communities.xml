@@ -1,75 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:background="#fcfcfc"
-    android:gravity="center"
-    android:id="@+id/ll">
+    tools:context=".communities.CommunitiesActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/churchCard"
-        android:layout_width="match_parent"
-        android:layout_height="97dp">
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/communityList"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="200dp"
+        android:id="@+id/communityText"
+        android:hint="Community Name"
+        app:layout_constraintTop_toTopOf="@id/communityList"
+        app:layout_constraintBottom_toTopOf="@id/zipCodeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:id="@+id/zipCodeText"
+        android:hint="zip code"
+        app:layout_constraintTop_toBottomOf="@id/communityText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="0dp"
-                android:layout_height="66dp"
-                android:layout_weight=".15"
-                android:background="@drawable/cercleshape_green"
-                android:padding="10dp"
-                android:src="@drawable/baseline_groups_white_18dp" />
+    <Button
+        android:id="@+id/addCommunity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/zipCodeText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="add Community"/>
 
-            <TextView
-                android:id="@+id/textView1"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".7"
-                android:text="Oak Hill Church Community"
-                android:textSize="24sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView><androidx.cardview.widget.CardView
-    android:id="@+id/streetCard"
-    android:layout_width="match_parent"
-    android:layout_height="97dp">
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:id="@+id/memberText"
+        android:hint="member name"
+        app:layout_constraintTop_toBottomOf="@id/addCommunity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/addMember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/memberText"
+        android:text="add Member"/>
+    <ProgressBar
+        android:id="@+id/activity_communities_progressbar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="66dp"
-            android:layout_weight=".15"
-            android:background="@drawable/cercleshape_blue"
-            android:padding="10dp"
-            android:src="@drawable/baseline_groups_white_18dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".7"
-            android:text="Mainstreet Community"
-            android:textSize="24sp" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

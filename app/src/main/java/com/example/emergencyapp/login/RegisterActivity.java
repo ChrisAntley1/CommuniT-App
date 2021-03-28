@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
@@ -62,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void registerUser() {
         final String email = editEmail.getText().toString().trim();
         final String name = editName.getText().toString().trim();
-        final String address = editAddress.getText().toString().trim();
+        final String zipCode = editAddress.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
         if(name.isEmpty()){
@@ -75,11 +76,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             editEmail.requestFocus();
             return;
         }
-        if(address.isEmpty()){
-            editAddress.setError("Address required.");
+        if(zipCode.isEmpty()){
+            editAddress.setError("Zip code required.");
             editAddress.requestFocus();
             return;
         }
+
+        if(zipCode.length() != 5){
+            editAddress.setError("Please enter a valid zip code.");
+            editAddress.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            editEmail.setError("Please enter a valid email address.");
+            editEmail.requestFocus();
+            return;
+        }
+
         if(password.isEmpty()){
             editPassword.setError("Password required.");
             editPassword.requestFocus();
@@ -108,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-                            User user = new User(name, address, email);
+                            User user = new User(name, Integer.parseInt(zipCode), email);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
