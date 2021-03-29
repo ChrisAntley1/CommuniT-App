@@ -81,9 +81,6 @@
         android:shadowColor="#000000"
         android:text="Login"
         android:textColor="#FFFFFF"
-        android:textColorHighlight="#009688"
-        android:textColorHint="#009688"
-        android:textColorLink="#009688"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +109,15 @@
         android:text="Create Account"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_login_login_button" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/activity_login_google_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_login_login_button" />
 
 

@@ -1,16 +1,21 @@
 package com.example.emergencyapp.login;
 
+import java.util.ArrayList;
+
 public class User {
 
-    public String name, address, email;
+    public String name, email;
+    public int zipCode;
+    public ArrayList<String> communityList;
 
     public User(){
 
     }
 
-    public User(String name, String address, String email){
+    public User(String name, int zipCode, String email){
         this.name = name;
-        this.address = address;
+        this.zipCode = zipCode;
         this.email = email;
+        communityList = new ArrayList<>();
     }
 }
