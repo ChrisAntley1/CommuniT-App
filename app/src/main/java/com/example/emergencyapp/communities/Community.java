@@ -18,6 +18,5 @@ public class Community {
         this.captain = captain;
         this.zipCode = zipCode;
         members = new ArrayList<>();
-        members.add(captain);
     }
 }

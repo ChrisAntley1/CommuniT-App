@@ -47,7 +47,6 @@ public class CommunitiesActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_communities);
 
-        progressBar.setVisibility(View.VISIBLE);
 
         communityText = findViewById(R.id.communityText);
         memberText = findViewById(R.id.memberText);
@@ -56,6 +55,8 @@ public class CommunitiesActivity extends AppCompatActivity implements View.OnCli
         memberButton = findViewById(R.id.addMember);
         progressBar = findViewById(R.id.activity_communities_progressbar);
         communityButton.setOnClickListener(this);
+
+        progressBar.setVisibility(View.VISIBLE);
 
         arrayList = new ArrayList<>();
         listView = findViewById(R.id.communityList);
@@ -157,7 +158,7 @@ public class CommunitiesActivity extends AppCompatActivity implements View.OnCli
         );
     }
 
-    private void createNewCommunity(String username, String community, String zipCode) {
+    private void createNewCommunity(final String username, String community, String zipCode) {
         final String communityID = community;
 
         Community newCom = new Community(community, Integer.parseInt(zipCode), username);
@@ -166,6 +167,9 @@ public class CommunitiesActivity extends AppCompatActivity implements View.OnCli
             public void onComplete(@NonNull Task<Void> task) {
 
                 if (task.isSuccessful()){
+
+                    //add user to Community member list; do this here instead of in Community constructor to give user a proper index in Firebase
+                    reference.child(communityID).child("members").push().setValue(username);
 
                     //add community to user's community list on Firebase
                     userNode.child("communityList").push().setValue(communityID).addOnCompleteListener(new OnCompleteListener<Void>() {
