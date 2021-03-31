@@ -10,12 +10,23 @@
     android:background="#fcfcfc"
     android:gravity="center"
     android:id="@+id/ll">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_main_current_community"
+        android:text="No Community Selected"
+        android:textSize="25sp"
+        android:layout_marginBottom="25dp"
+        />
+
     <LinearLayout
         android:clipToPadding="false"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <androidx.cardview.widget.CardView
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"

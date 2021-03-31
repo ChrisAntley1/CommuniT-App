@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.emergencyapp.communities.CommunitiesActivity;
 import com.example.emergencyapp.login.LoginActivity;
@@ -24,6 +25,7 @@ public class MainActivity extends Activity {
     private FirebaseAnalytics analytics;
     private Button signOut;
     private FirebaseAuth mAuth;
+    private TextView currentCommunity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +38,11 @@ public class MainActivity extends Activity {
         analytics = FirebaseAnalytics.getInstance(this);
         signOut = findViewById(R.id.activity_main_sign_out_button);
         mAuth = FirebaseAuth.getInstance();
+        currentCommunity = findViewById(R.id.activity_main_current_community);
+
+        Bundle extras = getIntent().getExtras();
+        String communityName = extras.getString("selectedCommunity");
+        currentCommunity.setText(communityName);
 
         communitiesCard.setOnClickListener(new View.OnClickListener() {
             @Override
