@@ -29,6 +29,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editEmail, editPassword;
     private ProgressBar progressBar;
     private GoogleSignInClient mGoogleSignInClient;
+    private DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,17 +65,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
-
+        reference = FirebaseDatabase.getInstance().getReference();
         login.setOnClickListener(this);
         createAccount.setOnClickListener(this);
         forgotPassword.setOnClickListener(this);
         googleLogin.setOnClickListener(this);
     }
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
 
     @Override
     public void onClick(View v) {
@@ -100,6 +99,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    //sign in with Google
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    //sign in with username and password
     private void userLogin() {
         String email, password;
         email = editEmail.getText().toString().trim();
@@ -139,11 +145,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                        //check for email verification
 //                    }
                     //go to main activity
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    reference.child("Users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                            if(task.isSuccessful()) {
+                                User userData = task.getResult().getValue(User.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("selectedCommunity", userData.selectedCommunity.name);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            else {
+                                Toast.makeText(LoginActivity.this, "Failed to get user's current community from Firebase", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                     Toast.makeText(LoginActivity.this, "Welcome! We have no association with Emergen-C and denounce all forms of Vitamin C.", Toast.LENGTH_LONG).show();
                 }
                 else {
                     Toast.makeText(LoginActivity.this, "Incorrect email or password.", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
+                    return;
                 }
                 progressBar.setVisibility(View.GONE);
                 finish();
@@ -188,11 +212,36 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.d("Login Activity", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            User newUser = new User(user.getDisplayName(), 11111, user.getEmail());
+                            //if this is a new user, create their user entry in Database
+                            if (task.getResult().getAdditionalUserInfo().isNewUser()){
+                                final User userData = new User(user.getDisplayName(), 11111, user.getEmail());
+                                reference.child("Users").push().setValue(userData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.putExtra("currentCommunity", userData.selectedCommunity.name);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                            }
 
-                            FirebaseDatabase.getInstance().getReference().child("Users").push().setValue(newUser);
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
+                            //Retrieve already existing user's information from database
+                            else {
+                                reference.child("Users").child(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                                        User userData = task.getResult().getValue(User.class);
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.putExtra("currentCommunity", userData.selectedCommunity.name);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+
+                            }
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Login Activity", "signInWithCredential:failure", task.getException());
