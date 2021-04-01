@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,9 +35,10 @@ public class CommunitiesActivity extends AppCompatActivity  {
     public ProgressBar progressBar;
 
     private FirebaseDatabase rootNode;
-    private DatabaseReference reference;
-    private DatabaseReference userNode;
-    private String username;
+    private FirebaseAuth mAuth;
+    private DatabaseReference communityDB;
+    private DatabaseReference userDBEntry;
+    private String username, userID;
 
     private ListView listView;
     private ArrayList<String> nameArrayList;
@@ -60,10 +62,19 @@ public class CommunitiesActivity extends AppCompatActivity  {
         //show the progressbar. Currently shows indefinitely until user has a community, should fix
         progressBar.setVisibility(View.VISIBLE);
 
-        //get Firebase Realtime Database references
+        //get Database and auth
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Communities");
-        userNode = rootNode.getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        mAuth = FirebaseAuth.getInstance();
+        communityDB = rootNode.getReference("Communities");
+        userDBEntry = rootNode.getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        userID = mAuth.getCurrentUser().getUid();
+         userDBEntry.child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+             @Override
+             public void onComplete(@NonNull Task<DataSnapshot> task) {
+                 username = task.getResult().getValue(String.class);
+             }
+         });
 
         //Set up community list View adapter
         nameArrayList = new ArrayList<>();
@@ -80,7 +91,7 @@ public class CommunitiesActivity extends AppCompatActivity  {
                         + " community; tap a different community to switch.", Toast.LENGTH_SHORT).show();
 
                 CommunityListEntry selected = new CommunityListEntry(idArrayList.get(i), listView.getItemAtPosition(i).toString());
-                userNode.child("selectedCommunity").setValue(selected);
+                userDBEntry.child("selectedCommunity").setValue(selected);
             }
         });
 
@@ -99,19 +110,17 @@ public class CommunitiesActivity extends AppCompatActivity  {
             }
         });
 
-        userNode.child("communityList").addChildEventListener(new ChildEventListener() {
+        userDBEntry.child("communityList").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                Iterable<DataSnapshot> data = snapshot.getChildren();
                 String name = "";
                 String id = "";
-                for(DataSnapshot child: data){
-                    if (child.getKey().equals("name")){
-                        name = child.getValue(String.class);
-                    }
-                    else id = child.getValue(String.class);
-                }
+
+                name = snapshot.getValue(String.class);
+                Log.println(Log.INFO, "CommunitiesActivity", "value is " + name);
+                id = snapshot.getKey();
+                Log.println(Log.INFO, "CommunitiesActivity", "key is " + id);
 
                 nameArrayList.add(name);
                 idArrayList.add(id);
@@ -169,31 +178,16 @@ public class CommunitiesActivity extends AppCompatActivity  {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        userNode.child("name").get()
-                .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                     @Override
-                     public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(CommunitiesActivity.this, "Failed to get username.", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
-                            return;
-                        }
-
-                        username = task.getResult().getValue(String.class);
-                        createNewCommunity(username, community, zipCode);
-                     }
-                 }
-
-        );
+        createNewCommunity(community, zipCode);
     }
 
-    private void createNewCommunity(final String username, final String communityName, String zipCode) {
-        final String communityID = reference.push().getKey();
+    private void createNewCommunity(final String communityName, String zipCode) {
+        final String communityID = communityDB.push().getKey();
 
-        final MemberListEntry memberListEntry = new MemberListEntry(username, userNode.getKey());
-        Community newCom = new Community(communityName, Integer.parseInt(zipCode), memberListEntry);
+//        final MemberListEntry memberListEntry = new MemberListEntry(username, userDBEntry.getKey());
+        Community newCom = new Community(communityName, Integer.parseInt(zipCode));
 
-        reference.child(communityID).setValue(newCom).addOnCompleteListener(new OnCompleteListener<Void>() {
+        communityDB.child(communityID).setValue(newCom).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
@@ -201,12 +195,32 @@ public class CommunitiesActivity extends AppCompatActivity  {
 
                     //add user to Community member list; do this here instead of in Community constructor to give user a proper index in Firebase
 
-                    reference.child(communityID).child("members").push().setValue(memberListEntry);
+                    communityDB.child(communityID).child("members").child(userID).setValue(username).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Log.println(Log.INFO, "Communities", "successfully created member list and added user.");
+
+                            }
+
+                            else Log.println(Log.INFO, "Communities", "Failed to create member list and added user.");
+                        }
+                    });
+
+                    //Make creating user the community captain
+
+                    communityDB.child(communityID).child("captain").child("uID").setValue(userID);
+                    communityDB.child(communityID).child("captain").child("name").setValue(username);
+
 
                     //add community to user's community list on Firebase
-                    CommunityListEntry communityListEntry = new CommunityListEntry(communityID, communityName);
-                    userNode.child("selectedCommunity").setValue(communityListEntry);
-                    userNode.child("communityList").push().setValue(communityListEntry).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    userDBEntry.child("communityList").child(communityID).setValue(communityName);
+//                    CommunityListEntry communityListEntry = new CommunityListEntry(communityID, communityName);
+//                    userDBEntry.child("selectedCommunity").setValue(communityListEntry);
+//                    userDBEntry.child("communityList").push().setValue(communityListEntry).addOnCompleteListener(new OnCompleteListener<Void>()
+
+                    userDBEntry.child("selectedCommunity").child("cID").setValue(communityID);
+                    userDBEntry.child("selectedCommunity").child("name").setValue(communityName).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             progressBar.setVisibility(View.GONE);
@@ -248,7 +262,7 @@ public class CommunitiesActivity extends AppCompatActivity  {
             return;
         }
 
-        Query communityQuery = reference.child(community);
+        Query communityQuery = communityDB.child(community);
 
     }
 }
