@@ -9,17 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.SplashScreen"
-                android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".communities.CommunityProfile"></activity>
+        <activity
+            android:name=".login.SplashScreen"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".login.ResetPasswordActivity" />
         <activity android:name=".communities.CommunitiesActivity" />
         <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".HurricanePlan" />
         <activity android:name=".Plan_View_Page" />
         <activity android:name=".MainActivity" />

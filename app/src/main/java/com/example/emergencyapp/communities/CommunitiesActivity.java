@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -42,7 +43,7 @@ public class CommunitiesActivity extends AppCompatActivity  {
     public EditText communityText, newMemberEmailText, zipCodeText, inviteCodeText;
     public Button newCommunityButton, memberButton, copyCodeButton, joinButton;
     public ProgressBar progressBar;
-    public TextView currentCommunity;
+    public TextView currentCommunityView;
     private FirebaseDatabase rootNode;
     private FirebaseAuth mAuth;
     private DatabaseReference communityDB;
@@ -72,8 +73,9 @@ public class CommunitiesActivity extends AppCompatActivity  {
         newMemberEmailText = findViewById(R.id.member_email_text);
         inviteCodeText = findViewById(R.id.community_invite_code_text);
         copyCodeButton = findViewById(R.id.copyCommunityCode);
-        currentCommunity = findViewById(R.id.current_community);
+        currentCommunityView = findViewById(R.id.current_community);
         joinButton = findViewById(R.id.join_community_button);
+
 
         //get Database and auth
         rootNode = FirebaseDatabase.getInstance();
@@ -95,7 +97,7 @@ public class CommunitiesActivity extends AppCompatActivity  {
                  if (task.isSuccessful()){
 
                      currentCommunityEntry = task.getResult().getValue(CommunityListEntry.class);
-                     currentCommunity.setText(currentCommunityEntry.name);
+                     currentCommunityView.setText(currentCommunityEntry.name);
                  }
              }
          });
@@ -112,18 +114,29 @@ public class CommunitiesActivity extends AppCompatActivity  {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Toast.makeText(CommunitiesActivity.this, "Now operating in " + listView.getItemAtPosition(i).toString()
-                        + " community; tap a different community to switch.", Toast.LENGTH_SHORT).show();
 
                 final String name = listView.getItemAtPosition(i).toString();
                 currentCommunityEntry = new CommunityListEntry(idArrayList.get(i), name);
+
+
                 userDBEntry.child("selectedCommunity").setValue(currentCommunityEntry).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) currentCommunity.setText(name);
+                        if (task.isSuccessful()) {
+//                            currentCommunityView.setText(name);
+                            Log.d("CommunitiesActivity", "Successfully set selected community in database.");
+                        }
+
+
                     }
                 });
 
+                Intent intent = new Intent(CommunitiesActivity.this, CommunityProfile.class);
+                Log.d("CommunitiesActivity", "onItemClick: values going into intent are: "
+                        + currentCommunityEntry.name + " and " + currentCommunityEntry.cID);
+                intent.putExtra("community_name", currentCommunityEntry.name);
+                intent.putExtra("community_id", currentCommunityEntry.cID);
+                startActivity(intent);
             }
         });
 
