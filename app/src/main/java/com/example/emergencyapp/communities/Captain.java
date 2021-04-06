@@ -1,14 +1,14 @@
 package com.example.emergencyapp.communities;
 
-public class MemberListEntry {
+public class Captain {
 
     public String username;
     public String uID;
 
-    public MemberListEntry() {
+    public Captain() {
     }
 
-    public MemberListEntry(String username, String id) {
+    public Captain(String id, String username) {
         this.username = username;
         this.uID = id;
     }
