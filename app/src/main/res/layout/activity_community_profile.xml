@@ -39,7 +39,20 @@
             android:layout_gravity="center"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Block members"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            />
 
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_profile_member_list"
+            />
     </LinearLayout>
 
 </ScrollView>

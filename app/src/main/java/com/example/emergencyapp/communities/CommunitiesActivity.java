@@ -102,7 +102,6 @@ public class CommunitiesActivity extends AppCompatActivity  {
              }
          });
 
-
         //Set up community list View adapter
         nameArrayList = new ArrayList<>();
         idArrayList = new ArrayList<>();
@@ -123,51 +122,26 @@ public class CommunitiesActivity extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-//                            currentCommunityView.setText(name);
+                            currentCommunityView.setText(name);
                             Log.d("CommunitiesActivity", "Successfully set selected community in database.");
                         }
-
-
                     }
                 });
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int i, long id) {
 
                 Intent intent = new Intent(CommunitiesActivity.this, CommunityProfile.class);
                 Log.d("CommunitiesActivity", "onItemClick: values going into intent are: "
-                        + currentCommunityEntry.name + " and " + currentCommunityEntry.cID);
-                intent.putExtra("community_name", currentCommunityEntry.name);
-                intent.putExtra("community_id", currentCommunityEntry.cID);
+                        + nameArrayList.get(i) + " and " + idArrayList.get(i));
+                intent.putExtra("community_name", nameArrayList.get(i));
+                intent.putExtra("community_id", idArrayList.get(i));
                 startActivity(intent);
-            }
-        });
 
-        memberButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(CommunitiesActivity.this, "this don't do nuthin", Toast.LENGTH_SHORT).show();
-                addNewMember();
-            }
-        });
-
-        newCommunityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkNewCommunityValues();
-            }
-        });
-
-        copyCodeButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                copyInviteCode();
-            }
-        });
-
-        joinButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                joinCommunity();
+                return true;
             }
         });
 
@@ -208,6 +182,37 @@ public class CommunitiesActivity extends AppCompatActivity  {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        memberButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(CommunitiesActivity.this, "this don't do nuthin", Toast.LENGTH_SHORT).show();
+                addNewMember();
+            }
+        });
+
+        newCommunityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkNewCommunityValues();
+            }
+        });
+
+        copyCodeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                copyInviteCode();
+            }
+        });
+
+        joinButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                joinCommunity();
             }
         });
     }
@@ -439,6 +444,7 @@ public class CommunitiesActivity extends AppCompatActivity  {
         });
     }
 
+    //helper method for making inner listview work properly, since it technically should be inside a scroll view
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {

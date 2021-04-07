@@ -21,4 +21,15 @@ public class Community {
         this.captain = captain;
         this.passCode = passCode;
     }
+
+    @Override
+    public String toString() {
+        return "Community{" +
+                "name='" + name + '\'' +
+                ", zipCode=" + zipCode +
+                ", memberList=" + memberList.toString() +
+                ", captain=" + captain +
+                ", passCode='" + passCode + '\'' +
+                '}';
+    }
 }
