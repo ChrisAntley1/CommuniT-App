@@ -162,7 +162,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                     });
-                    Toast.makeText(LoginActivity.this, "Welcome! We have no association with Emergen-C and denounce all forms of Vitamin C.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Successfully logged in!", Toast.LENGTH_LONG).show();
                 }
                 else {
                     Toast.makeText(LoginActivity.this, "Incorrect email or password.", Toast.LENGTH_LONG).show();

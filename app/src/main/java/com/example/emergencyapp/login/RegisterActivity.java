@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -132,6 +133,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     if (task.isSuccessful()){
                                         Toast.makeText(RegisterActivity.this, "User has been successfully registered!", Toast.LENGTH_LONG).show();
 
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                finish();
+                                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                            }
+                                        }, 2000);
+                                        finish();
                                         // Email Verification if we want at some point
 //                                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                                     }

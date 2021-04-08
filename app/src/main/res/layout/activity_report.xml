@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".postDisasterReport.ReportActivity">
+
+    <TextView
+        android:id="@+id/activity_report_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Post Hurricane Block Report"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/activity_report_sub_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="150dp"
+        android:text="Block Captain Safety"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+       />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:text="I am uninjured and safe."
+        android:textSize="20sp"
+        />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+        android:text="My family is accounted for and my home is safe."
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:id="@+id/activity_report_begin_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Begin Block Walkthrough"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/activity_report_assign_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I am unable to complete report"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
