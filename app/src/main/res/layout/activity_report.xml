@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:text="I am uninjured and safe."
+        android:id="@+id/activity_report_safe_checkbox"
         android:textSize="20sp"
         />
     <CheckBox
@@ -42,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="50dp"
+        android:id="@+id/activity_report_family_checkbox"
         android:text="My family is accounted for and my home is safe."
         android:textSize="20sp"
         />
