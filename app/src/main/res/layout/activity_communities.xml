@@ -5,36 +5,38 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+
     <ScrollView
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_marginBottom="80dp"
+        android:layout_height="match_parent"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_margin="2dp"
+            android:orientation="vertical"
             tools:context=".communities.CommunitiesActivity">
 
             <TextView
-                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="Your Communities"
-                android:textSize="30sp"
-                />
+                android:textSize="30sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="long press to view community"
-                android:textSize="15sp"
                 android:layout_marginLeft="15dp"
-                />
+                android:text="long press to view community"
+                android:textSize="15sp" />
+
             <ListView
+                android:id="@+id/communityList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/communityList"
                 android:layout_marginBottom="50dp"
                 app:layout_constraintBottom_toTopOf="@id/create_community"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -43,31 +45,31 @@
                 />
 
             <TextView
+                android:id="@+id/create_community"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/create_community"
-                android:text="Create New Community"
                 android:layout_marginBottom="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/communityText"
+                android:text="Create New Community"
                 android:textSize="30sp"
-                />
+                app:layout_constraintBottom_toTopOf="@id/communityText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <EditText
+                android:id="@+id/communityText"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="32dp"
-                android:id="@+id/communityText"
                 android:hint="Community Name"
                 app:layout_constraintBottom_toTopOf="@id/zipCodeText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
+                android:id="@+id/zipCodeText"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="32dp"
-                android:id="@+id/zipCodeText"
                 android:hint="zip code"
                 app:layout_constraintBottom_toTopOf="@id/addCommunity"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -79,68 +81,64 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="50dp"
+                android:text="add Community"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="add Community"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Join New Community"
-                android:textSize="30sp"
-                />
+                android:textSize="30sp" />
 
             <EditText
+                android:id="@+id/community_invite_code_text"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:id="@+id/community_invite_code_text"
-                android:hint="community invite code"
-                />
+                android:hint="community invite code" />
 
-                <Button
-                    android:id="@+id/join_community_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="join community"/>
+            <Button
+                android:id="@+id/join_community_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="join community" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Captain Options"
-                android:textSize="30sp"
-                />
+                android:textSize="30sp" />
 
             <EditText
+                android:id="@+id/member_email_text"
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:id="@+id/member_email_text"
-                android:hint="email address"
-                />
+                android:hint="email address" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                >
+                android:layout_marginBottom="100dp"
+                android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/addMember"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:text="add Member ->"/>
+                    android:text="add Member ->" />
 
                 <Button
                     android:id="@+id/copyCommunityCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="copy invite code"/>
+                    android:text="copy invite code" />
 
             </LinearLayout>
 
@@ -157,7 +155,6 @@
 
         </LinearLayout>
     </ScrollView>
-
 
     <TextView
         android:layout_width="fill_parent"
