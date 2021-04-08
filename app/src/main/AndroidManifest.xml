@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".communities.CommunityProfile"></activity>
+        <activity android:name=".postDisasterReport.SubmitActivity"></activity>
+        <activity android:name=".postDisasterReport.MedicalStatus" />
+        <activity android:name=".postDisasterReport.WalkThrough" />
+        <activity android:name=".postDisasterReport.ReportActivity" />
+        <activity android:name=".communities.CommunityProfile" />
         <activity
             android:name=".login.SplashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
