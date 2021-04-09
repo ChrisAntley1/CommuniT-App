@@ -2,6 +2,7 @@ package com.example.emergencyapp.postDisasterReport;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ public class WalkThrough extends AppCompatActivity {
 
     private Button submitButton;
     private CheckBox gasCheckBox, fireCheckBox, floodCheckBox, structureCheckBox;
+    EventReport report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,13 @@ public class WalkThrough extends AppCompatActivity {
 
                 //gather checkbox statuses, compile into intent, open medical status activity
 
+                report = new EventReport(gasCheckBox.isChecked(), fireCheckBox.isChecked(), floodCheckBox.isChecked(), structureCheckBox.isChecked());
+                Intent intent = new Intent(WalkThrough.this, MedicalStatus.class);
+                intent.putExtra("report", report);
+                startActivity(intent);
             }
         });
+
+
     }
 }

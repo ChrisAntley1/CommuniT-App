@@ -1,13 +1,13 @@
 package com.example.emergencyapp.login;
 
-import com.example.emergencyapp.communities.CommunityListEntry;
+import com.example.emergencyapp.communities.CurrentCommunityObject;
 
 
 public class User {
 
     public String name, email;
     public int zipCode;
-    public CommunityListEntry selectedCommunity;
+    public CurrentCommunityObject selectedCommunity;
 
     public User(){
 
@@ -18,6 +18,6 @@ public class User {
         this.zipCode = zipCode;
         this.email = email;
 
-        selectedCommunity = new CommunityListEntry("0", "No communities added.");
+        selectedCommunity = new CurrentCommunityObject("0", "No communities added.");
     }
 }

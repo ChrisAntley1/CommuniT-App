@@ -28,12 +28,12 @@ public class ReportActivity extends AppCompatActivity {
         familyCheckBox = findViewById(R.id.activity_report_family_checkbox);
 
 
+
         beginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //stuff
-
                 if(safeCheckBox.isChecked() && familyCheckBox.isChecked()){
 
                     startActivity(new Intent(ReportActivity.this, WalkThrough.class));
@@ -41,7 +41,7 @@ public class ReportActivity extends AppCompatActivity {
 
                 else {
                     Toast.makeText(ReportActivity.this,
-                            "Please confirm your own safety and that of your family before beginning walk through report.",
+                            "Please confirm your own safety and that of your family before beginning block observations.",
                             Toast.LENGTH_LONG).show();
                 }
             }

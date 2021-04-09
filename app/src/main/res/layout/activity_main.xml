@@ -212,8 +212,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:id="@+id/activity_main_sign_out_button"
-        android:text="sign out"
+        android:layout_marginTop="15dp"
+        android:id="@+id/activity_main_report_button"
+        android:text="Post Event Report"
         />
+
+    <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    android:id="@+id/activity_main_sign_out_button"
+    android:text="sign out"
+    />
 </LinearLayout>
