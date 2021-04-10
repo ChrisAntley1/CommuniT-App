@@ -1,6 +1,5 @@
 package com.example.emergencyapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.emergencyapp.communities.CommunitiesActivity;
 import com.example.emergencyapp.login.LoginActivity;
+import com.example.emergencyapp.postDisasterReport.ReportActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -20,17 +20,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
-    private CardView communitiesCard;
-    private CardView suppliesCard;
-    private CardView plansCard;
-    private CardView alertsCard;
+    private CardView communitiesCard, suppliesCard, plansCard, alertsCard;
     private FirebaseAnalytics analytics;
-    private Button signOut;
+    private Button signOut, reportButton;
     private FirebaseAuth mAuth;
     private TextView currentCommunity;
     private String communityName;
@@ -48,6 +46,7 @@ public class MainActivity extends Activity {
         signOut = findViewById(R.id.activity_main_sign_out_button);
         mAuth = FirebaseAuth.getInstance();
         currentCommunity = findViewById(R.id.activity_main_current_community);
+        reportButton = findViewById(R.id.activity_main_report_button);
         reference = FirebaseDatabase.getInstance().getReference();
 
 //        Bundle extras = getIntent().getExtras();
@@ -95,6 +94,13 @@ public class MainActivity extends Activity {
                 mAuth.signOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
+            }
+        });
+
+        reportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ReportActivity.class));
             }
         });
     }

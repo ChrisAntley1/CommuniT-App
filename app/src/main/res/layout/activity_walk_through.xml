@@ -5,71 +5,101 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
     tools:context=".postDisasterReport.WalkThrough">
 
-    <TextView
-        android:id="@+id/activity_report_banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Post Hurricane Block Report"
-        android:textSize="50sp"
-        android:textStyle="bold"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/activity_walkthrough_observe_view"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Post Hurricane Block Report"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="75dp"
+            android:text="Walk-through Observations"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+
+        <CheckBox
+            android:id="@+id/activity_walkthrough_gas_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="20dp"
+            android:text="Smell of gas"
+            android:textSize="20sp"
+            />
+        <CheckBox
+            android:id="@+id/activity_walkthrough_flood_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="20dp"
+            android:text="Significant flooding"
+            android:textSize="20sp"
+            />
+        <CheckBox
+            android:id="@+id/activity_walkthrough_fire_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="20dp"
+            android:text="fire or smoke"
+            android:textSize="20sp"
+            />
+        <CheckBox
+            android:id="@+id/activity_walkthrough_structure_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="20dp"
+            android:text="structurally compromised home"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:id="@+id/activity_walkthrough_submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit and continue ->"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/activity_walkthrough_message_layout"
         android:gravity="center_horizontal"
-        />
-
-    <TextView
-        android:id="@+id/activity_report_sub_banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="75dp"
-        android:text="Walkthrough Observations"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="Smell of gas"
-        android:textSize="20sp"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="Significant flooding"
-        android:textSize="20sp"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="fire or smoke"
-        android:textSize="20sp"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="structurally compromised home"
-        android:textSize="20sp"
-        />
-
-    <Button
-        android:id="@+id/activity_walkthrough_submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit and continue ->"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
-        />
-
+        >
+        <com.tomer.fadingtextview.FadingTextView
+            android:id="@+id/activity_walkthrough_fading_message"
+            android:layout_margin="25dp"
+            android:textSize="30sp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            app:texts="@array/walkthrough_message"
+            app:timeout="2500"
+            />
+    </LinearLayout>
 </LinearLayout>

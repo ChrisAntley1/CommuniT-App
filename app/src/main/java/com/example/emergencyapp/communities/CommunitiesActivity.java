@@ -55,7 +55,7 @@ public class CommunitiesActivity extends AppCompatActivity  {
     private ArrayList<String> idArrayList;
     private ArrayAdapter<String> arrayAdapter;
     private final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    private CommunityListEntry currentCommunityEntry;
+    private CurrentCommunityObject currentCommunityEntry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +96,7 @@ public class CommunitiesActivity extends AppCompatActivity  {
              public void onComplete(@NonNull Task<DataSnapshot> task) {
                  if (task.isSuccessful()){
 
-                     currentCommunityEntry = task.getResult().getValue(CommunityListEntry.class);
+                     currentCommunityEntry = task.getResult().getValue(CurrentCommunityObject.class);
                      currentCommunityView.setText(currentCommunityEntry.name);
                  }
              }
@@ -115,7 +115,7 @@ public class CommunitiesActivity extends AppCompatActivity  {
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
 
                 final String name = listView.getItemAtPosition(i).toString();
-                currentCommunityEntry = new CommunityListEntry(idArrayList.get(i), name);
+                currentCommunityEntry = new CurrentCommunityObject(idArrayList.get(i), name);
 
 
                 userDBEntry.child("selectedCommunity").setValue(currentCommunityEntry).addOnCompleteListener(new OnCompleteListener<Void>() {

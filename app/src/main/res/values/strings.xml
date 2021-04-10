@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">CommuniT</string>
+
+    <string-array name="report_message">
+        <item>"Thank you for stepping up as Block Captain."</item>
+        <item>"Let's confirm that you and your household are safe."</item>
+    </string-array>
+
+    <string-array name="walkthrough_message">
+        <item>"Great. Let's begin with the walk-through."</item>
+        <item>"Complete this step before checking on individuals."</item>
+        <item>"First, see that it is safe to leave your home."</item>
+        <item>"Take a short walk through your block and observe."</item>
+    </string-array>
+    <string-array name="medical_message">
+        <item>"Good work. Now let's check on block members."</item>
+        <item>"Avoid offering help until each house has been visited."</item>
+        <item>"Tell members you are gathering information for emergency services."</item>
+        <item>"Record households that have sustained injuries."</item>
+    </string-array>
+    <string-array name="submit_message">
+        <item>"Well done. Your report is complete."</item>
+        <item>"Review your findings and submit when ready."</item>
+    </string-array>
+
+
+
+
 </resources>

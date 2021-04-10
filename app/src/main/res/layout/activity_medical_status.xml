@@ -5,71 +5,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
     tools:context=".postDisasterReport.MedicalStatus">
 
-    <TextView
-        android:id="@+id/activity_medical_banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Post Hurricane Block Report"
-        android:textSize="50sp"
-        android:textStyle="bold"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:id="@+id/activity_medical_confirm_view"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Post Hurricane Block Report"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:text="Block Medical Status"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text= "If a member of your block requires emergency services please dial 911 first."
+            android:textSize="20sp"
+            android:background="#FDFF0000"
+            android:textColor="#FFFFFF"
+            android:shadowColor="#80000000"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:text="Check households that have sustained injuries."
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:id="@+id/activity_medical_list_view"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/activity_medical_submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit and continue ->"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/activity_medical_message_layout"
         android:gravity="center_horizontal"
-        />
+        >
+        <com.tomer.fadingtextview.FadingTextView
+            android:id="@+id/activity_medical_fading_message"
+            android:layout_margin="30dp"
+            android:textSize="30sp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            app:texts="@array/medical_message"
+            app:timeout="3500"
+            />
 
-    <TextView
-        android:id="@+id/activity_medical_sub_banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="75dp"
-        android:text="Block Medical Status"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="Johnson household"
-        android:textSize="20sp"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="Rodriguez Household"
-        android:textSize="20sp"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="Chang Household"
-        android:textSize="20sp"
-        />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="20dp"
-        android:text="Smith Household"
-        android:textSize="20sp"
-        />
-
-    <Button
-        android:id="@+id/activity_medical_submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit and continue ->"
-        android:layout_marginTop="40dp"
-        android:layout_gravity="center"
-        />
+    </LinearLayout>
 
 </LinearLayout>

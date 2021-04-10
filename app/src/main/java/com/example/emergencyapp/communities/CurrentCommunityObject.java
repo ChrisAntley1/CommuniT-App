@@ -1,14 +1,14 @@
 package com.example.emergencyapp.communities;
 
-public class CommunityListEntry {
+public class CurrentCommunityObject {
 
     public String cID;
     public String name;
 
-    public CommunityListEntry() {
+    public CurrentCommunityObject() {
     }
 
-    public CommunityListEntry(String cID, String name) {
+    public CurrentCommunityObject(String cID, String name) {
         this.cID = cID;
         this.name = name;
     }
