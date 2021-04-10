@@ -4,22 +4,47 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import com.example.emergencyapp.R;
+import com.tomer.fadingtextview.FadingTextView;
 
 public class WalkThrough extends AppCompatActivity {
 
     private Button submitButton;
     private CheckBox gasCheckBox, fireCheckBox, floodCheckBox, structureCheckBox;
-    EventReport report;
+    private FadingTextView messageTextView;
+    private LinearLayout observeLayout, messageLayout;
+    private EventReport report;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk_through);
+
+        messageLayout = findViewById(R.id.activity_walkthrough_message_layout);
+        messageTextView = findViewById(R.id.activity_walkthrough_fading_message);
+        observeLayout = findViewById(R.id.activity_walkthrough_observe_view);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                messageTextView.stop();
+                messageLayout.setVisibility(View.GONE);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        observeLayout.setVisibility(View.VISIBLE);
+                    }
+                }, 500);
+            }
+        }, 13500);
 
         submitButton = findViewById(R.id.activity_walkthrough_submit_button);
 
