@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.emergencyapp.MainActivity;
 import com.example.emergencyapp.R;
+import com.example.emergencyapp.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -214,13 +215,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             //if this is a new user, create their user entry in Database
                             if (task.getResult().getAdditionalUserInfo().isNewUser()){
-                                final User userData = new User(user.getDisplayName(), 11111, user.getEmail());
+                                final User userData = new User(user.getDisplayName(), user.getEmail());
                                 reference.child("Users").push().setValue(userData).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        intent.putExtra("currentCommunity", userData.selectedCommunity.name);
-                                        startActivity(intent);
+                                        startActivity(new Intent(LoginActivity.this, AddressActivity.class));
                                         finish();
                                     }
                                 });

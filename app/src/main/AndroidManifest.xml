@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".postDisasterReport.SubmitReport"></activity>
+        <activity android:name=".login.AddressActivity"></activity>
+        <activity android:name=".postDisasterReport.SubmitReport" />
         <activity android:name=".postDisasterReport.MedicalStatus" />
         <activity android:name=".postDisasterReport.WalkThrough" />
         <activity android:name=".postDisasterReport.ReportActivity" />
