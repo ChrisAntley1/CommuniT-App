@@ -11,25 +11,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.emergencyapp.MainActivity;
 import com.example.emergencyapp.R;
+import com.example.emergencyapp.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Button register;
     private ProgressBar progressBar;
-    private EditText editName, editAddress, editPassword, editEmail;
-    private TextView banner;
+    private EditText editName, editPhone, editPassword, editEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,32 +36,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         register = findViewById(R.id.activity_register_register_button);
         editName = findViewById(R.id.activity_register_name_edit);
-        editAddress = findViewById(R.id.activity_register_address_edit);
+        editPhone = findViewById(R.id.activity_register_phone_edit);
         editEmail = findViewById(R.id.activity_register_email_edit);
         editPassword = findViewById(R.id.activity_register_password_edit);
-        banner = findViewById(R.id.activity_register_banner);
         progressBar = findViewById(R.id.activity_register_progressbar);
 
-        register.setOnClickListener(this);
-        banner.setOnClickListener(this);
-    }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.activity_register_register_button:
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 registerUser();
-                break;
-            case R.id.activity_register_banner:
-                startActivity(new Intent(this, MainActivity.class));
-                break;
-        }
+            }
+        });
     }
 
     private void registerUser() {
         final String email = editEmail.getText().toString().trim();
         final String name = editName.getText().toString().trim();
-        final String zipCode = editAddress.getText().toString().trim();
+        final String phone = editPhone.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
         if(name.isEmpty()){
@@ -77,15 +66,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             editEmail.requestFocus();
             return;
         }
-        if(zipCode.isEmpty()){
-            editAddress.setError("Zip code required.");
-            editAddress.requestFocus();
+        if(phone.isEmpty()){
+            editPhone.setError("Zip code required.");
+            editPhone.requestFocus();
             return;
         }
 
-        if(zipCode.length() != 5){
-            editAddress.setError("Please enter a valid zip code.");
-            editAddress.requestFocus();
+        if(!Patterns.PHONE.matcher(phone).matches()){
+            editPhone.setError("Please enter a valid phone number.");
+            editPhone.requestFocus();
             return;
         }
 
@@ -123,10 +112,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-                            User user = new User(name, Integer.parseInt(zipCode), email);
+                            User user = new User(name, phone, email);
 
                             FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child(mAuth.getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -137,10 +126,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                             @Override
                                             public void run() {
                                                 finish();
-                                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                                startActivity(new Intent(RegisterActivity.this, AddressActivity.class));
                                             }
                                         }, 2000);
-                                        finish();
                                         // Email Verification if we want at some point
 //                                        FirebaseAuth.getInstance().getCurrentUser().sendEmailVerification();
                                     }

@@ -19,11 +19,9 @@
         <item>"Record households that have sustained injuries."</item>
     </string-array>
     <string-array name="submit_message">
-        <item>"Well done. Your report is complete."</item>
+        <item>"Your report is complete."</item>
         <item>"Review your findings and submit when ready."</item>
     </string-array>
-
-
 
 
 </resources>

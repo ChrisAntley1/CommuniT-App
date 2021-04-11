@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.emergencyapp.MainActivity;
 import com.example.emergencyapp.R;
+import com.example.emergencyapp.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
