@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.emergencyapp.communities.CommunitiesActivity;
 import com.example.emergencyapp.login.LoginActivity;
 import com.example.emergencyapp.postDisasterReport.ReportActivity;
+import com.example.emergencyapp.supplies.SuppliesActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -68,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
         suppliesCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SuppliesActivity.class);
+                intent.putExtra("selectedCommunity", communityName);
+
+                startActivity(intent);
                 analytics.logEvent("supplies_clicked", null);
             }
         });
