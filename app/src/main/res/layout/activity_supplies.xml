@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/sample_main_layout">
+
+
+    <FrameLayout
+        android:id="@+id/sample_content_fragment"
+        android:layout_weight="2"
+        android:background="#99d3ff"
+        android:layout_width="match_parent"
+        android:layout_height="0px" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:scrollbars="vertical"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin= "16dp"
+            android:src="@drawable/sharp_add_white_18dp"
+            app:backgroundTint="#837E7C"
+            android:layout_gravity="bottom|end"
+            android:visibility="visible" />
+
+    </FrameLayout>
+
+</LinearLayout>
+

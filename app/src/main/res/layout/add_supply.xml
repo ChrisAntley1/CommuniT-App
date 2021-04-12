@@ -1,0 +1,134 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:background="#99d3ff"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="fill"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#000000"
+            android:id="@+id/medicineText"
+            android:text="Enter Supply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:layout_gravity="center">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="25dp"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                app:hintTextColor="#000000"
+                app:boxStrokeColor="#000000"
+                android:gravity="center"
+                android:paddingBottom="25dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/supply_name"
+                    android:layout_width="match_parent"
+                    android:textColor="#000000"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp" >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textColorHint="#000000"
+                app:hintTextColor="#000000"
+                app:boxStrokeColor="#000000"
+                android:gravity="center"
+                android:paddingBottom="25dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/supply_amount"
+                    android:layout_width="match_parent"
+                    android:textColor="#000000"
+                    android:layout_height="wrap_content"
+                    android:hint="Quantity"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/vsep_2"
+                android:layout_width="20sp"
+                android:layout_height="wrap_content"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+
+
+
+        <Button
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="  Save  "
+            android:backgroundTint="#E66F"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:id="@+id/save_supply_button"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="4dp"
+            android:gravity="right|bottom"
+            android:orientation="horizontal"
+            android:paddingTop="0dp"
+            android:layout_marginTop="25dp"
+            android:id = "@+id/request_response"
+            android:visibility="gone">
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>
+
